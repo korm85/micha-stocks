@@ -1,2 +1,42 @@
-node_modules
-dist
+# Dependencies
+node_modules/
+app/node_modules/
+deck/node_modules/
+
+# Database
+app/data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Node
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/
+
+# Embeddings cache
+app/scripts/.cache/
+**/.cache/
+
+# Logs
+*.log

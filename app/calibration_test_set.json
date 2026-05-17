@@ -1,0 +1,107 @@
+{
+  "description": "Calibration test set for Micha Stocks semantic search",
+  "date": "2026-05-12",
+  "threshold": "Each query maps to ground-truth patterns from the KB. Used to find the confidence gate where false positives = 0.",
+  "tests": [
+    {
+      "query": "Is this stock too expensive to buy right now?",
+      "ground_truth_patterns": ["trade_with_trend", "fear_greed_index"],
+      "notes": "Patterns about valuation logic — high PE, checking sentiment"
+    },
+    {
+      "query": "My stock dropped 15%, should I sell it?",
+      "ground_truth_patterns": ["exit_strategy_stop_loss"],
+      "notes": "Stop loss rules, thesis re-evaluation"
+    },
+    {
+      "query": "There's a big crash happening, should I buy the dip?",
+      "ground_truth_patterns": ["entry_timing_dip", "overtrading"],
+      "notes": "Dip buying rules — wait for stabilization, don't catch falling knife"
+    },
+    {
+      "query": "Earnings report is coming next week, what should I do?",
+      "ground_truth_patterns": ["earnings_analysis"],
+      "notes": "Don't trade earnings, focus on guidance"
+    },
+    {
+      "query": "The market keeps hitting new all-time highs, I'm nervous",
+      "ground_truth_patterns": ["market_breadth", "position_sizing"],
+      "notes": "Breadth divergence, reduce position size"
+    },
+    {
+      "query": "I keep buying and selling every day, I'm not making money",
+      "ground_truth_patterns": ["overtrading", "compounding_math"],
+      "notes": "Overtrading warning, focus on quality not quantity"
+    },
+    {
+      "query": "How much of my portfolio should I put in one stock?",
+      "ground_truth_patterns": ["position_sizing"],
+      "notes": "Core positions 5-7%, no single position > 10%"
+    },
+    {
+      "query": "Interest rates are changing, which sectors should I focus on?",
+      "ground_truth_patterns": ["sector_rotation"],
+      "notes": "Rate cuts = growth/tech, rate hikes = financials/energy"
+    },
+    {
+      "query": "VIX is spiking and everyone is panicking",
+      "ground_truth_patterns": ["fear_greed_index", "entry_timing_dip"],
+      "notes": "Fear = opportunity, VIX > 30 look for buys"
+    },
+    {
+      "query": "I can't read these charts, too many indicators",
+      "ground_truth_patterns": ["simple_chart_reading"],
+      "notes": "Simplify — price + volume + trend + key MAs"
+    },
+    {
+      "query": "Should I sell everything before May?",
+      "ground_truth_patterns": ["sell_in_may"],
+      "notes": "Nuanced view — reduce size, don't blindly sell"
+    },
+    {
+      "query": "How do I know if a stock is in an uptrend?",
+      "ground_truth_patterns": ["trade_with_trend", "simple_chart_reading"],
+      "notes": "Above 150/200 MA, higher highs and higher lows"
+    },
+    {
+      "query": "I bought a stock at $100, now it's at $80. What now?",
+      "ground_truth_patterns": ["exit_strategy_stop_loss"],
+      "notes": "20% drop — re-evaluate thesis, hard stop at 25%"
+    },
+    {
+      "query": "Is it better to invest for the long term or trade daily?",
+      "ground_truth_patterns": ["compounding_math", "overtrading"],
+      "notes": "Time in market > timing the market, compounding wins"
+    },
+    {
+      "query": "A stock I like reported earnings and beat estimates but the stock dropped",
+      "ground_truth_patterns": ["earnings_analysis"],
+      "notes": "A beat with lowered guidance = sell signal"
+    },
+    {
+      "query": "Only a few tech stocks are going up, everything else is flat",
+      "ground_truth_patterns": ["market_breadth", "sector_rotation"],
+      "notes": "Narrow rally — breadth divergence warning"
+    },
+    {
+      "query": "What does Micha think about stop losses?",
+      "ground_truth_patterns": ["exit_strategy_stop_loss"],
+      "notes": "Clear exit rules, 25% max loss, thesis-based"
+    },
+    {
+      "query": "I want to start investing but I don't understand charts",
+      "ground_truth_patterns": ["simple_chart_reading", "compounding_math"],
+      "notes": "Education first, simplify chart reading"
+    },
+    {
+      "query": "NVIDIA is up 200% this year, should I buy more?",
+      "ground_truth_patterns": ["trade_with_trend", "fear_greed_index"],
+      "notes": "Check trend, check if euphoric sentiment"
+    },
+    {
+      "query": "My portfolio is down 10% this month, should I change my strategy?",
+      "ground_truth_patterns": ["position_sizing", "market_breadth", "exit_strategy_stop_loss"],
+      "notes": "Portfolio review, check if broader market correction"
+    }
+  ]
+}

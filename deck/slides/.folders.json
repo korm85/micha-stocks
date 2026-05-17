@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "id": "f-5d74fa34",
+      "name": "Micha Stocks",
+      "icon": {
+        "type": "color",
+        "value": "#c0392b"
+      }
+    }
+  ],
+  "assignments": {
+    "architecture": "f-5d74fa34",
+    "patterns-system": "f-5d74fa34",
+    "value-prop": "f-5d74fa34",
+    "search-pipeline": "f-5d74fa34"
+  }
+}

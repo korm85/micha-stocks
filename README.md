@@ -1,64 +1,50 @@
-# open-slide workspace
+# Micha Stocks
 
-Slides as React components. Each slide lives under `slides/<id>/index.tsx` and default-exports an array of page components. The `@open-slide/core` runtime handles layout, scaling, navigation, thumbnails, and fullscreen play mode — you just write the pages.
+AI-powered stock decision tool that applies Micha's reasoning framework from 2,500+ YouTube videos. Get actionable trade signals backed by sourced patterns and live market data.
 
-## Getting started
+## What it does
+
+- **Ask any stock question** — "Should I buy NVDA?" or "Is my portfolio at risk?"
+- **Two display modes** — Basic (bottom-line signals) or Pro (full expert dashboard)
+- **Pattern-based AI** — reasoning grounded in 20 sourced trading patterns from Micha's content
+- **Live market data** — yfinance feeds real-time prices, PE, volume, analyst targets
+- **Source-verified** — every pattern links to the actual video + chunk it came from
+- **Full audit trail** — every recommendation logged with patterns used and market snapshot
+
+## Quick Start
 
 ```bash
+git clone https://github.com/korm85/micha-stocks
+cd micha-stocks
+
+# Dashboard
+cd app
+pip install streamlit plotly yfinance requests pandas
+streamlit run streamlit_app/app.py
+
+# Slide deck
+cd deck
 pnpm install
 pnpm dev
 ```
 
-Then open the dev server and edit `slides/getting-started/index.tsx`, or create a new slide at `slides/<your-slide>/index.tsx`.
+See [AGENTS.md](./AGENTS.md) for the complete architecture, DB schema, and AI agent onboarding.
 
-## Scripts
+## Live Demo
 
-| Command | Description |
-| --- | --- |
-| `pnpm dev` | Start the dev server with hot reload. |
-| `pnpm build` | Build a static bundle you can deploy. |
-| `pnpm preview` | Preview the built bundle locally. |
+| Service | URL |
+|---------|-----|
+| **Dashboard** | https://nuc-server.tail8cfaa2.ts.net |
+| **Database Browser** | https://nuc-server.tail8cfaa2.ts.net/db/ |
+| **Slide Deck** | http://192.168.1.214:5175 |
 
-## Authoring a slide
+## Architecture (4 Layers)
 
-```tsx
-// slides/my-slide/index.tsx
-import type { Page, SlideMeta } from '@open-slide/core';
+1. **Data Ingestion** — Scraper downloads 2,502 YouTube transcripts → 17,286 chunks in SQLite + FTS5
+2. **Embedding Pipeline** — multilingual-e5-small generates 384-dim vectors for every chunk and pattern
+3. **Search Engine** — Semantic search (cosine similarity) → FTS5 keyword → All patterns fallback
+4. **Application Layer** — Streamlit dashboard + yfinance + DeepSeek AI reasoning + audit trail
 
-const Cover: Page = () => (
-  <div style={{ width: '100%', height: '100%' }}>Hello</div>
-);
+## Tech Stack
 
-export const meta: SlideMeta = { title: 'My slide' };
-export default [Cover] satisfies Page[];
-```
-
-Every page renders into a fixed **1920 × 1080** canvas — design with absolute pixel values. Put images, videos, and fonts under `slides/<id>/assets/` and import them directly.
-
-See [`CLAUDE.md`](./CLAUDE.md) for the full authoring guide.
-
-## Navigation
-
-- Arrow keys / PageUp / PageDown move between pages.
-- `F` enters fullscreen play mode; Esc exits.
-- In play mode: Space / → next, ← prev.
-
-## Claude Code integration
-
-This workspace ships with Claude Code skills preconfigured under `.claude/skills/` and `.agents/skills/`. Ask Claude Code to "make slides about X" and the `create-slide` skill takes over. Use `apply-comments` to iterate via inspector-style markers inside your source.
-
-## Config
-
-Optional `open-slide.config.ts` at the workspace root:
-
-```ts
-import type { OpenSlideConfig } from '@open-slide/core';
-
-const openSlideConfig: OpenSlideConfig = {
-  port: 5173,
-};
-
-export default openSlideConfig;
-```
-
-Supported fields: `slidesDir`, `port`.
+Streamlit · Plotly · yfinance · DeepSeek v4 Pro · SQLite FTS5 · open-slide · Tailscale Funnel
