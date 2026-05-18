@@ -151,3 +151,42 @@ Every agent writes a new entry at each milestone. Open this file to see how work
 ✅ Consistent with existing deck design system
 ```
 **Next:** View the deck at http://192.168.1.214:5175 (or run `cd deck && pnpm dev`)
+
+---
+
+## #009 🟢 START — 2026-05-18 13:00 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Deploy slide deck to public URL via Tailscale Funnel
+```
+• User wants the deck accessible publicly like the dashboard
+• Need to serve built static files behind Tailscale Funnel at /deck/ path
+• Challenge: open-slide builds with absolute /assets/ paths, need /deck/assets/ prefix
+```
+
+---
+
+## #010 ⚡ EXECUTE — 2026-05-18 13:10 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Build and configure public serving
+```
+• Built deck with Vite (open-slide ignores vite.config.ts due to configFile: false)
+• Added <base href="/deck/"> + patched asset paths to /deck/assets/ in index.html
+• Created serve_deck.py — Python HTTP server that strips /deck/ prefix from paths
+• Started on port 8515 with @reboot crontab entry for persistence
+• Added Tailscale Funnel route: /deck/ → http://127.0.0.1:8515
+• Verified assets load correctly through public URL
+```
+**Files Changed:** `deck/serve_deck.py` (+55 lines), `deck/start_deck.sh` (+14 lines), `deck/dist/index.html` (patched)
+
+---
+
+## #011 ✅ DONE — 2026-05-18 13:20 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Deck publicly accessible
+```
+✅ https://nuc-server.tail8cfaa2.ts.net/deck/ — serves the full slide deck
+✅ All 11 slides load with JS + CSS assets
+✅ Persistent across reboots via crontab
+✅ Auto-starts with Python's http.server on port 8515
+```
+**Next:** Update AGENTS.md with the new public URL for the deck

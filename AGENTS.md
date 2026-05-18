@@ -192,6 +192,7 @@ Simple/routine tasks → MiniMax M2.7 to conserve V4 Flash allocation.
 |---------|-----|
 | Dashboard (public) | https://nuc-server.tail8cfaa2.ts.net |
 | Database browser | https://nuc-server.tail8cfaa2.ts.net/db/ |
+| Slide deck (public) | https://nuc-server.tail8cfaa2.ts.net/deck/ |
 | Dashboard (LAN) | http://192.168.1.214:8501 |
 | Slide deck (LAN) | http://192.168.1.214:5175 |
 
