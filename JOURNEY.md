@@ -190,3 +190,54 @@ Every agent writes a new entry at each milestone. Open this file to see how work
 ✅ Auto-starts with Python's http.server on port 8515
 ```
 **Next:** Update AGENTS.md with the new public URL for the deck
+
+---
+
+## #012 🔴 BLOCKED — 2026-05-18 13:30 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `blocked`
+**Task:** User reports 404 for deck at https://nuc-server.tail8cfaa2.ts.net/deck/
+```
+❌ User got "page not found" — server was running, Funnel config was correct
+🔍 Investigation root cause:
+   The original serve_deck.py had two issues:
+   1. CSS font references used absolute paths (/assets/geist-*.woff2)
+      → CSS url() doesn't respect <base> tag
+      → Browser requests fonts from /assets/ (root handler, wrong backend)
+   2. index.html asset paths were absolute (/assets/xxx.js)
+      → When <base> tag is set, relative paths resolve correctly
+      → But absolute paths bypass <base> entirely
+```
+**Flow Tag:** `rework` — had to redesign the serving approach
+
+---
+
+## #013 ⚡ EXECUTE — 2026-05-18 13:40 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Fix deck serving — proper approach
+```
+• Rebuilt deck from clean build
+• Made asset paths RELATIVE in index.html (src="assets/xxx.js")
+  → <base href="/deck/"> resolves them correctly
+• Patched CSS font paths from /assets/→/deck/assets/
+  → CSS url() references now match Funnel routing
+• Switched to Python's built-in http.server (no custom server needed)
+  → Tailscale Funnel strips /deck/ prefix → server receives clean paths
+• Deleted serve_deck.py (replaced by simpler approach)
+• Updated start_deck.sh to use python3 -m http.server --directory
+```
+**Files Changed:** `deck/dist/index.html` (patched), `deck/dist/assets/index-CEpVEGUJ.css` (patched), `deck/start_deck.sh` (rewritten)
+
+---
+
+## #014 ✅ DONE — 2026-05-18 13:50 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Deck serving fixed and verified
+```
+✅ Public URL: https://nuc-server.tail8cfaa2.ts.net/deck/
+✅ All assets 200: page, JS bundle, CSS, fonts, favicon, lazy chunks
+✅ Server: plain python3 -m http.server, no custom code
+✅ Funnel: /deck/ → http://127.0.0.1:8515 (unchanged)
+✅ Auto-start: crontab @reboot (unchanged)
+✅ Clean git: no custom server scripts to maintain
+```
+**Next:** User should test now — the fix is live

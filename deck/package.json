@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "open-slide dev",
     "build": "open-slide build",
+    "build:deploy": "open-slide build && python3 scripts/post-build.py",
     "preview": "open-slide preview",
+    "serve:deck": "python3 -m http.server 8515 --directory dist",
     "sync:skills": "open-slide sync:skills"
   },
   "dependencies": {
