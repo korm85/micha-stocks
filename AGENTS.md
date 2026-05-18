@@ -202,3 +202,54 @@ Simple/routine tasks → MiniMax M2.7 to conserve V4 Flash allocation.
 - **yfinance can be unstable** for some international tickers
 - **Rate limits**: OpenCode Go plan has per-model req/5h limits (see table above)
 - **FTS5 requires specific SQLite build** — standard Python sqlite3 includes it
+
+## Agent Handoff & Journey Logging
+
+Every AI agent working on this repo **MUST** follow these rules. They ensure no agent starts without context, and every action is traceable.
+
+### The Rule: Read JOURNEY.md, Write to JOURNEY.md
+
+There is one file that tracks all agent activity: **`JOURNEY.md`** at the repo root.
+
+- **On start** — read the last 10 entries of `JOURNEY.md` for recent context
+- **Before working** — write a 🟢 `START` entry declaring what you're doing and why
+- **During work** — write ⚡ `EXECUTE` entries at each milestone (files changed, decisions made)
+- **If stuck** — write 🔴 `BLOCKED` with the issue and resolution
+- **On handoff** — write 🔄 `HANDOFF` with explicit current state + next steps for the receiver
+- **On completion** — write ✅ `DONE` with summary and verification
+
+### Entry Format
+
+```markdown
+## #NNN PHASE — 2026-05-14 HH:MM UTC
+**Agent:** Name (model) · **Flow:** `tag`
+**Task:** One-line summary
+```
+• What you did → file or outcome
+• Each bullet is one action
+```
+**Next:** What should happen next (required for HANDOFF/DONE)
+```
+
+See `JOURNEY.md` header for the full legend of phases (🟢⚡🔄🔴 etc.) and flow tags (`smooth`, `rework`, `bounced`, etc.).
+
+### Self-Explanatory Design
+
+`JOURNEY.md` teaches itself. Its header contains a complete reference:
+- All phase emojis with their meanings
+- All flow tags with what they signal (good ✅ or bad 🔴)
+- The entry template
+
+No external docs needed. Open the file and you instantly understand the system.
+
+### Flow Tags Reveal Bad Workflows
+
+When you scan `JOURNEY.md`, watch for these tags:
+
+| Tag | Problem it signals |
+|-----|-------------------|
+| `rework` | Context was lost — agent didn't know something was already done |
+| `bounced` | Unnecessary A→B→A agent ping-pong — workflow needs restructuring |
+| `confused` | Task wasn't defined clearly enough before work started |
+| `overhead` | Task was too big — should have been split into smaller steps |
+| `blocked` | Pre-flight checks were missed — dependency wasn't verified upfront |
