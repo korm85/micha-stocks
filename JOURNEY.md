@@ -114,3 +114,40 @@ Every agent writes a new entry at each milestone. Open this file to see how work
 ✅ All initial entries written (#001-#005 document this setup)
 ```
 **Next:** This system is live. Every future agent reads JOURNEY.md on start and writes here as they work. To review flow quality, scan for ♻️ REWORK, ↔️ BOUNCE, 🌀 CONFUSED tags — these flag bad workflows that need attention.
+
+---
+
+## #006 🟢 START — 2026-05-17 13:40 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Create visual guide presentation of the journey log workflow
+```
+• User requested a visual guide explaining how agents operate via the journey log
+• Using the open-slide deck in deck/slides/
+• Goal: 10-11 slides covering problem, solution, log format, phases, flow tags, handoff protocol, bad workflow spotting, live example
+```
+
+---
+
+## #007 ⚡ EXECUTE — 2026-05-17 13:50 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Write the journey-log-workflow slide deck
+```
+• Created deck/slides/journey-log-workflow/index.tsx
+• 11 slides with animations, consistent amber/teal/green palette
+• Covers: The Problem → Solution → Reading the Log → Phases → Flow Tags → Handoff Protocol → Bad Workflows → Flow Health → Live Example → Summary
+• Uses same design language as existing decks (open-slide, inline styles, keyframe animations)
+```
+**Files Changed:** `deck/slides/journey-log-workflow/index.tsx` (+540 lines)
+
+---
+
+## #008 ✅ DONE — 2026-05-17 13:55 UTC
+**Agent:** Hermes Agent (deepseek-v4-flash) · **Flow:** `smooth`
+**Task:** Visual guide complete
+```
+✅ Slide deck created at deck/slides/journey-log-workflow/
+✅ 11 slides covering end-to-end journey log system
+✅ Self-explanatory — each slide teaches itself through visuals
+✅ Consistent with existing deck design system
+```
+**Next:** View the deck at http://192.168.1.214:5175 (or run `cd deck && pnpm dev`)
