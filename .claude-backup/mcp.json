@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "linkedin-browser": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/mnt/c/Users/korm8/linkedin-mcp-server",
+        "run",
+        "linkedin-mcp-server"
+      ]
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "figma-developer-mcp"
+      ],
+      "env": {
+        "FIGMA_API_KEY": "{{ REDACTED }}"
+      }
+    }
+  }
+}
