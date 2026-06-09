@@ -1,8 +1,8 @@
 # Micha Stocks
 
-> Ask "Should I buy NVDA?" — get an answer grounded in 2,500+ hours of expert video content.
+> 2,500 hours of expert analysis. One question. An answer in 30 seconds — built by a PM, no data team needed.
 
-AI-powered stock decision tool that applies Micha's trading reasoning framework, extracted from 2,502 YouTube videos, to any ticker you query. Every signal is sourced, every pattern is cited, and live market data keeps it real.
+Most retail investors drown in content or pay for subscriptions that recycle headlines. This tool extracted 20 repeatable trading patterns from 2,502 YouTube videos, indexed them semantically, and wires them to live market data — so any question about any ticker returns a sourced, reasoned signal instead of a guess.
 
 ---
 
